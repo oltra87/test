@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="dist/js/zui/css/zui.min.css">
+	<link href="dist/js/zui/lib/datetimepicker/datetimepicker.min.css" rel="stylesheet">
+	<link href="dist/js/zui/lib/chosen/chosen.min.css" rel="stylesheet">
+	<link href="dist/css/main.css" rel="stylesheet">
+	<title>安吉尔物联云项目管理平台</title>
+</head>
+<body id="homebody">
+<div id="app">
+	<nav class="navbar" role="navigation" id="header">
+		<div class="">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/files/web/index.html"><img src="dist/images/logo.png"></a>
+				物联云项目管理平台
+			</div>
+			<div class="collapse navbar-collapse navbar-right">
+				<ul class="nav navbar-nav">
+					<li>
+						<a v-link="{ path:'/message' }" class="bell">
+							<i class="icon icon-bell"></i></i>
+							<span class="label label-badge label-warning">199</span>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="###" class="dropdown-toggle" data-toggle="dropdown">
+							<img src="http://zui.sexy/docs/img/img2.jpg" width="22px" height="22px" class="img-circle" alt="头像">
+							Admin（管理员） <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a v-link="{ path: '/admin/adminpass'}">账号设置</a></li>
+							<li><a href="javascript:void(0)" @click="loginOut">退出登录</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid" style="padding: 0">
+		<div id="grid_main" class="scrollbar-hover">
+			<ul class="nav">
+				<li><a v-link="{ path: '/home'}"><i class="icon icon-home"></i>主页</a></li>
+				<li><a v-link="{ path: '/server'}"><i class="icon icon-server"></i>设备</a></li>
+				<li><a v-link="{ path: '/pro'}"><i class="icon icon-cube"></i>产品</a></li>
+				<li><a v-link="{ path:'/sale' }"><i class="icon icon-bookmark-empty"></i>营销</a></li>
+				<li><a v-link="{ path:'/order' }"><i class="icon icon-file-text-o"></i>定单</a></li>
+				<li><a v-link="{ path:'/customer' }"><i class="icon icon-user"></i>客户</a></li>
+				<!--<li><a v-link="{ path:'/partner' }"><i class="icon icon-flag"></i>合作</a></li>-->
+				<!--<li><a v-link="{ path:'/service' }"><i class="icon icon-wrench"></i>售后</a></li>-->
+				<li><a v-link="{ path:'/qc' }"><i class="icon icon-check-board"></i>产测</a></li>
+				<li><a v-link="{ path:'/message' }"><i class="icon icon-bell"></i>消息</a></li>
+				<li><a v-link="{ path:'/sim' }"><i class="icon icon-save"></i>网卡</a></li>
+				<li><a v-link="{ path:'/instructions' }"><i class="icon icon-question-sign"></i>说明书</a></li>
+				<li><a v-link="{ path:'/admin' }"><i class="icon icon-unlock-alt"></i>系统</a></li>
+				<li><a v-link="{ path:'/version' }"><i class="icon icon-bookmark-empty"></i>版本</a></li>
+				<li><a v-link="{ path:'/log' }"><i class="icon icon-file-o"></i>日志</a></li>
+			</ul>
+			<p>版本V1.0</p>
+		</div>
+		<router-view></router-view>
+	</div>
+</div>
+<!--
+    描述：主页
+    时间：2018-04-03
+-->
+<template id="home">
+	<div class="grid_detail">
+		<h3>数据中心</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/home/indexserver'}">设备数据</a></li>
+			<li><a v-link="{ path: '/home/indexuser'}">用户数据</a></li>
+			<li><a v-link="{ path: '/home/indexfault'}">故障数据</a></li>
+			<li><a v-link="{ path: '/home/indexwarter'}">水量数据</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 主页设备数据 -->
+<div id="indexserver"></div>
+<!-- 主页设备数据 -->
+<div id="indexservermap"></div>
+<!-- 主页用户数据 -->
+<div id="indexuser"></div>
+<!-- 主页用户数据 -->
+<div id="indexusermap"></div>
+<!-- 主页故障数据 -->
+<div id="indexfault"></div>
+<!-- 主页水量数据 -->
+<div id="indexwarter"></div>
+
+<!--
+描述：系统管理
+    时间：2018-04-30
+-->
+<template id="admin">
+	<div class="grid_detail">
+		<h3>系统管理</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/admin/admincompany'}">公司管理</a></li>
+			<li><a v-link="{ path: '/admin/adminrole'}">角色权限</a></li>
+			<li><a v-link="{ path: '/admin/adminaccount'}">平台账号</a></li>
+			<li><a v-link="{ path: '/admin/adminwarnset'}">异常配置</a></li>
+			<li><a v-link="{ path: '/admin/adminiot'}">IOT配置</a></li>
+			<li><a v-link="{ path: '/admin/adminad'}">APP广告</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 公司管理 -->
+<div id="admincompany"></div>
+<!-- 角色权限 -->
+<div id="adminrole"></div>
+<!-- 平台账号 -->
+<div id="adminaccount"></div>
+<!-- 修改账号密码 -->
+<div id="adminpass"></div>
+<!-- IOT配置 -->
+<div id="adminiot"></div>
+<!-- 服务总线配置 -->
+<div id="adminiotline"></div>
+<!-- APP广告设置 -->
+<div id="adminad"></div>
+<!-- 设备异常提醒阀值配置 -->
+<div id="adminwarnset"></div>
+
+
+<!--
+    描述：设备中心
+    时间：2018-04-04
+-->
+<template id="server">
+	<div class="grid_detail">
+		<h3>设备中心</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/server/serverlist'}">设备管理</a></li>
+			<li><a v-link="{ path: '/server/serverfault'}">故障异常</a></li>
+			<li><a v-link="{ path: '/server/serverbarcode'}">条码库</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 租赁设备管理 -->
+<div id="serverlist"></div>
+<!-- 大客户设备管理 -->
+<div id="serverlistbig"></div>
+<!-- 设备管理-设备详细 -->
+<div id="serverdetail"></div>
+<!-- 设备故障报警 -->
+<div id="serverfault"></div>
+<!-- 设备故障报警-详细 -->
+<div id="serverfaultdetail"></div>
+<!-- 设备异常报警 -->
+<div id="serverwarn"></div>
+<!-- 设备异常报警-详细 -->
+<div id="serverwarndetail"></div>
+<!-- 条码库 -->
+<div id="serverbarcode"></div>
+
+
+<!--
+    描述： 产品管理
+    时间：2018-04-04
+-->
+<template id="promag">
+	<div class="grid_detail">
+		<h3>产品管理</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/pro/promaterial'}">耗材清单</a></li>
+			<li><a v-link="{ path: '/pro/proquality'}">耗材验证</a></li>
+			<li><a v-link="{ path: '/pro/prolist'}">产品列表</a></li>
+			<li><a v-link="{ path: '/pro/propackage'}">租赁套餐</a></li>
+			<li class="display_hide"><a v-link="{ path: '/pro/prosim'}">流量套餐</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 耗材清单 -->
+<div id="promaterial"></div>
+<!-- 耗材验证 -->
+<div id="proquality"></div>
+<!-- 产品列表 -->
+<div id="prolist"></div>
+<!-- 产品详细 -->
+<div id="prodetail"></div>
+<!-- 添加产品 -->
+<div id="proadd"></div>
+<!-- 租赁套餐管理 -->
+<div id="propackage"></div>
+<!-- sim卡套餐管理 -->
+<div id="prosim"></div>
+
+<!--
+   描述：客户管理
+   时间：2018-04-30
+-->
+<template id="customer">
+	<div class="grid_detail">
+		<h3>客户管理</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/customer/customerbigwig'}">大客户</a></li>
+			<li><a v-link="{ path: '/customer/customerlist'}">终端客户</a></li>
+			<li><a v-link="{ path: '/customer/customerplace'}">租赁客户</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 大客户 -->
+<div id="customerbigwig"></div>
+<!-- 大客户详细 -->
+<div id="customerbigdetail"></div>
+<!-- 终端客户 -->
+<div id="customerlist"></div>
+<!-- 终端详细 -->
+<div id="customerdetail"></div>
+<!-- 场地方列表 -->
+<div id="customerplace"></div>
+<!-- 场地方详细 -->
+<div id="customerplacede"></div>
+
+<!--
+描述：合作伙伴
+时间：2018-05-08
+-->
+<!--<template id="partner">-->
+<!--<div class="grid_detail">-->
+<!--<h3>合作伙伴</h3>-->
+<!--<ul class="nav">-->
+<!---->
+<!--</ul>-->
+<!--</div>-->
+<!--<div class="page">-->
+<!--<router-view></router-view>-->
+<!--</div>-->
+<!--</template>-->
+
+
+
+<!--
+描述：订单财务中心
+    时间：2018-04-30
+-->
+<template id="order">
+	<div class="grid_detail">
+		<h3>定单中心</h3>
+		<ul class="nav">
+			<li class="display_hide"><a v-link="{ path: '/order/ordermold'}">定单类型</a></li>
+			<li><a v-link="{ path: '/order/orderlist'}">定单管理</a></li>
+			<li><a v-link="{ path: '/order/orderaccount'}">帐户管理</a></li>
+			<li><a v-link="{ path: '/order/orderrecharge'}">充值记录</a></li>
+			<li><a v-link="{ path: '/order/orderdetail'}">扣款记录</a></li>
+			<li><a v-link="{ path: '/order/orderdeposit'}">押金管理</a></li>
+			<li><a v-link="{ path: '/order/ordercount'}">结算管理</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+
+<!-- 定单类型 -->
+<div id="ordermold"></div>
+<!-- 租赁定单管理 -->
+<div id="orderlist"></div>
+<!-- 租赁定单详细-->
+<div id="orderlistde"></div>
+<!-- 大客户定单管理 -->
+<div id="orderwiglist"></div>
+<!-- 大客户定单详细-->
+<div id="orderwigde"></div>
+<!-- 租赁服务定单管理 -->
+<div id="orderservicelist"></div>
+<!-- 租赁服务定单详细-->
+<div id="orderservicede"></div>
+<!-- 账户管理 -->
+<div id="orderaccount"></div>
+<!-- 充值记录 -->
+<div id="orderrecharge"></div>
+<!-- 扣款记录 -->
+<div id="orderdetail"></div>
+<!-- 押金管理 -->
+<div id="orderdeposit"></div>
+<!-- 结算管理 -->
+<div id="ordercount"></div>
+
+<!--
+描述：营销管理
+    时间：2018-04-30
+-->
+<template id="sale">
+	<div class="grid_detail">
+		<h3>营销管理</h3>
+		<ul class="nav">
+			<li class="display_hide"><a v-link="{ path: '/sale/saleprocess'}">销售模式</a></li>
+			<li><a v-link="{ path: '/sale/saleslip'}">直营租赁</a></li>
+			<li class="display_hide"><a v-link="{ path: '/sale/saleslipwig'}">大客户</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 销售模式管理 -->
+<div id="saleprocess"></div>
+<!-- 直营租赁销售单管理 -->
+<div id="saleslip"></div>
+<!-- 直营租赁销售单明细 -->
+<div id="saleslipdetail"></div>
+<!-- 直营租赁销售单新增 -->
+<div id="saleslipadd"></div>
+
+<!-- 大客户销售单管理 -->
+<div id="saleslipwig"></div>
+<!-- 大客户销售单新增 -->
+<div id="saleslipwigadd"></div>
+<!-- 大客户销售单明细 -->
+<div id="saleslipwigde"></div>
+
+<!--
+描述：产测管理
+    时间：2018-04-30
+-->
+<template id="qc">
+	<div class="grid_detail">
+		<h3>产测管理</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/qc/qclist'}">产测记录</a></li>
+			<li><a v-link="{ path: '/qc/qcset'}">产测设置</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 产测记录 -->
+<div id="qclist"></div>
+<div id="qcset"></div>
+
+<!--
+描述：售后管理
+    时间：2018-04-30
+-->
+<template id="service">
+	<div class="grid_detail">
+		<h3>售后管理</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/service/servicemold'}">工单类型</a></li>
+			<li><a v-link="{ path: '/service/servicelist'}">工单管理</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 工单类型 -->
+<div id="servicemold"></div>
+<!-- 工单管理 -->
+<div id="servicelist"></div>
+<!-- 工单详细 -->
+<div id="servicedetail"></div>
+
+<!--
+描述：消息中心
+    时间：2018-04-30
+-->
+<template id="message">
+	<div class="grid_detail">
+		<h3>消息中心</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/message/messagemold'}">模版配置</a></li>
+			<li><a v-link="{ path: '/message/messagecontrol'}">推送配置</a></li>
+			<li><a v-link="{ path: '/message/messagesms'}">短信记录</a></li>
+			<li><a v-link="{ path: '/message/messagelist'}">消息记录</a></li>
+			<li><a v-link="{ path: '/message/messagefback'}">反馈记录</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 模版配置 -->
+<div id="messagemold"></div>
+<!-- 推送配置 -->
+<div id="messagecontrol"></div>
+<!-- 短信记录 -->
+<div id="messagesms"></div>
+<!-- 消息记录 -->
+<div id="messagelist"></div>
+<!-- 故障消息 -->
+<div id="messagefault"></div>
+<!-- 反馈记录 -->
+<div id="messagefback"></div>
+
+<!--
+描述：日志中心
+    时间：2018-04-30
+-->
+<template id="log">
+	<div class="grid_detail">
+		<h3>日志中心</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/log/logsys'}">系统日志</a></li>
+			<li><a v-link="{ path: '/log/logserver'}">上报日志</a></li>
+			<li><a v-link="{ path: '/log/loguser'}">控制日志</a></li>
+			<li><a v-link="{ path: '/log/loglink'}">接入日志</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 系统日志 -->
+<div id="logsys"></div>
+<!-- 故障上报日志 -->
+<div id="logserver"></div>
+<!-- 普通上报日志 -->
+<div id="logserverelse"></div>
+<!-- 控制日志 -->
+<div id="loguser"></div>
+<!-- 设备接入日志 -->
+<div id="loglink"></div>
+
+<!--
+描述：说明书
+    时间：2018-04-30
+-->
+<template id="instructions">
+	<div class="grid_detail">
+		<h3>说明书</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/instructions/instserver'}">设备说明</a></li>
+			<li><a v-link="{ path: '/instructions/instapp'}">APP说明</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 设备说明 -->
+<div id="instserver"></div>
+<!-- APP使用说明 -->
+<div id="instapp"></div>
+
+<!--
+描述：物联网卡
+    时间：2018-05-13
+-->
+<template id="sim">
+	<div class="grid_detail">
+		<h3>物联网卡</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/sim/simcard'}">网卡统计</a></li>
+			<li><a v-link="{ path: '/sim/simcardlist'}">网卡明细</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 物联网卡 -->
+<div id="simcard"></div>
+<div id="simcardlist"></div>
+
+
+<!--
+描述：版本管理
+    时间：2018-05-14
+-->
+<template id="version">
+	<div class="grid_detail">
+		<h3>版本管理</h3>
+		<ul class="nav">
+			<li><a v-link="{ path: '/version/versionIos'}">IOS版本</a></li>
+			<li><a v-link="{ path: '/version/versionAndroid'}">安卓版本</a></li>
+			<li><a v-link="{ path: '/version/firmware'}">固件升级</a></li>
+		</ul>
+	</div>
+	<div class="page">
+		<router-view></router-view>
+	</div>
+</template>
+<!-- 版本管理 -->
+<div id="versionIos"></div>
+<div id="versionAndroid"></div>
+<div id="firmware"></div>
+<div id="drivebywire"></div>
+
+
+
+
+
+
+
+<script src="dist/js/zui/lib/jquery/jquery.js"></script>
+<script src="dist/js/plugins/jquery.cookie.js"></script>
+<script src="dist/js/zui/js/zui.min.js"></script>
+<script src="dist/js/zui/lib/datetimepicker/datetimepicker.min.js"></script>
+<script src="dist/js/zui/lib/chosen/chosen.min.js"></script>
+<script src="dist/js/plugins/vue/vue_v1.js"></script>
+<script src="dist/js/plugins/vue/vue-router_v0.7.js"></script>
+<!--<script src="dist/js/plugins/vue/vue-resource.min.js"></script>-->
+<script src="dist/js/main.js"></script>
+
+
+
+
+
+<!-- ******* 浏览器兼容处理 Start ******* -->
+<!-- 提示IE7及更早版本的用户 -->
+<!--[if lte IE 8]>
+<div class="alert alert-danger">您正在使用 <strong>过时的</strong> 浏览器，使用老旧浏览器会对您的计算机安全造成威胁。是时候 <a href="http://browsehappy.com/">更换一个更好的浏览器</a> 来提升用户体验.</div>
+<![endif]-->
+<!-- 使得HTML5标签在IE8中也能使用 -->
+<!--[if lt IE 9]>
+<script src="dist/js/zui/lib/ieonly/html5shiv.js"></script>
+<![endif]-->
+<!-- ******* 浏览器兼容处理 End ******* -->
+<!-- 使IE8及早期版本支持media query来实现响应式布局 -->
+<!--[if lt IE 9]>
+<script src="dist/js/zui/lib/ieonly/respond.js"></script>
+<![endif]-->
+<!-- 使IE8及早期版本支持Canvas -->
+<!--[if lt IE 9]>
+<script src="dist/js/zui/lib/ieonly/excanvas.js"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script src="dist/js/zui/lib/ieonly/excanvas.js"></script>
+<![endif]-->
+</body>
+</html>
+<script>
+//	var idUtilIndex = 0 ;
+//	function idUtil(){
+//		idUtilIndex ++ ;
+//		return "web_dom_id_" + idUtilIndex;
+//	}
+</script>
